@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block headermenu %}
+<h1>{{ title }}</h1>
+
+<h1>Новости из мира IT</h1>
+<body>
+<ul>
+    {% for i in news %}
+    {% if i.published %}
+    <li>
+        <h2>{{ i.name }}</h2>
+        <p>{{ i.description|linebreaks|truncatewords:30}}</p>
+        <p> Tags: {{ i.tags}}</p>
+        <p><a href="{% url 'news' i.slug %}">Read</a></p>
+        {% if not forloop.last %}
+        <hr>
+        {% endif %}
+    </li>
+    {% endif %}
+    {% endfor %}
+</ul>
+</body>
+{% endblock %}
+</html>
