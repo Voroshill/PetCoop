@@ -1,27 +1,68 @@
-<!DOCTYPE html>
+{% load static %}
+
 <html lang="en">
 <head>
-    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ title }}</title>
-    <link rel="stylesheet" href="/static/search_site/css/styles.css" type="text/css">
-	<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Oswald:400,300" type="text/css">
-
-    <!--[if lt IE 9]>
-	<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-	<![endif]-->
+    <link rel="stylesheet" href="{% static 'search_site/css/styles.css' %}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Oswald:400,300&display=swap">
 </head>
 <body>
-<header>
-	<ul class="top-menu">
-		<li><a href=" {% url 'mainpage' %}">MainPage</a></li>
-		{% for m in menu %}
-		<li>
-			<a href=" {% url m.url_name %}"> {{ m.title }} </a>
-		</li>
-		{% endfor %}
-	</ul>
-</header>
-{% block headermenu %} {% endblock %}
+    <div class="wrapper">
+        <header>
+            <nav>
+                <ul class="top-menu">
+                    <li><a href="{% url 'mainpage' %}">MainPage</a></li>
+                    {% for page in menu %}
+                        <li><a href="{% url page.url_name %}">{{ page.title }}</a></li>
+                    {% endfor %}
+                </ul>
+            </nav>
+            <div class="auth-buttons">
+                <a href="{% url 'login' %}" class="btn btn-login">Login</a>
+            </div>
+        </header>
+        {% block headermenu %}
+        {% endblock %}
+
+        <main>
+            {% block content %}
+            {% endblock %}
+        </main>
+
+        <footer>
+            <div class="container">
+                <div class="footer-content">
+                    <section class="footer-section about">
+                        <h2>PetCoop</h2>
+                        <p>Find teammates and colleagues for your project</p>
+                    </section>
+
+                    <section class="footer-section links">
+                        <h2>Links</h2>
+                        <ul>
+                            <li><a href="{% url 'mainpage' %}">MainPage</a></li>
+                            {% for page in menu %}
+                                <li><a href="{% url page.url_name %}">{{ page.title }}</a></li>
+                            {% endfor %}
+                        </ul>
+                    </section>
+
+                    <section class="footer-section contact">
+                        <h2>Contacts</h2>
+                        <p>Mobile Phone: +1 (234) 567-890</p>
+                        <p>Email: info@example.com</p>
+                        <p>Address: 1234 Elm Street, Some City, ST 56789</p>
+                    </section>
+                </div>
+
+                <div class="footer-bottom">
+                    <p>&copy; 2024 PetCoop. All rights reserved.</p>
+                </div>
+            </div>
+        </footer>
+    </div>
 </body>
 </html>
