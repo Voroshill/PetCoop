@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block headermenu %}
+<h2>New name: {{ new.name }}</h2>
+<h4>Description:</h4>
+<p> {{ new.description }}</p>
+<h4>Tags:</h4>
+<p>{{ new.tags }}</p>
+<p>Published by {{ new.author }}</p>
+<a href="{% url 'news' %}">Back to News List</a>
+{% endblock %}

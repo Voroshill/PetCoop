@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block headermenu %}
+    <h1>{{ title }}</h1>
+{% endblock %}
+
+{% block content %}
+    <ul>
+        {% for new in page.object_list %}
+            {% if new.published %}
+                <li>
+                    <h2>{{ new.name }}</h2>
+                    <p>{{ new.description|linebreaks|truncatewords:30}}</p>
+                    <p> Tags: {{ new.tags}}</p>
+                    <p> Published by {{new.author}} </p>
+                    <a href="{% url 'show_new' new.slug %}" class="read-more">Read</a>
+                    {% if not forloop.last %}
+                        <hr>
+                    {% endif %}
+                </li>
+            {% endif %}
+        {% endfor %}
+    </ul>
+    {% include "search_site/pagination.html" with page=page %}
+{% endblock %}

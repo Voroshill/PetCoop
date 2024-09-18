@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block headermenu %}
+<h1>{{ title }}</h1>
+<body>
+    <ul>
+        {% for project in page.object_list %}
+        {% if project.is_visible %}
+        <li>
+            <h2>{{ project.name }}</h2>
+            <p> Programming language: {{ project.programming_language.name}}</p>
+            <p> Description: {{ project.description|truncatewords:30}}</p>
+            <p> Tags: {{ project.tags}}</p>
+            <p> Created by {{ project.author }} </p>
+            <p><a href="{% url 'show_project' project.slug %}" class="read-more">Show</a></p>
+            {% if not forloop.last %}
+            <hr>
+            {% endif %}
+        </li>
+        {% endif %}
+        {% endfor %}
+    </ul>
+    {% include "search_site/pagination.html" with page=page %}
+</body>
+
+{% endblock %}

@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block headermenu %}
+<h2>Name: {{ name }}</h2>
+<h4>Description:</h4>
+<p>{{ description }}</p>
+<h4>Programming Language:</h4>
+<p>{{ programming_language.name }}</p>
+<h4>Tags:</h4>
+<p>{{ tags }}</p>
+<p> Created by {{ author }} </p>
+<a href="{% url 'projects' %}">Back to Projects List</a>
+{% endblock %}
